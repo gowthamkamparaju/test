@@ -1,0 +1,27 @@
+name: Upload Files to Tomcat (EC2)
+ 
+on:
+  push:
+    branches: [ "main" ]  # Trigger on push to 'main' branch
+ 
+jobs:
+  deploy:
+    runs-on: ubuntu-latest  # Uses GitHub-hosted runner
+ 
+    steps:
+    - name: Checkout repository code
+      uses: actions/checkout@v3
+ 
+    - name: Prepare SSH key
+      run: |
+        echo "${{ secrets.EC2_SSH_KEY }}" > key.pem
+        chmod 600 key.pem
+ 
+    - name: Upload TXT file to Tomcat
+      run: |
+        scp -i key.pem -o StrictHostKeyChecking=no example.txt ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }}:/opt/tomcat/webapps/
+ 
+    - name: Upload WAR file to Tomcat
+      run: |
+        scp -i key.pem -o StrictHostKeyChecking=no dummy.war ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }}:/opt/tomcat/webapps/
+ 

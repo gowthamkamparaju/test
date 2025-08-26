@@ -10,6 +10,7 @@ jobs:
   call-docker-build:
     uses: ./.github/workflows/docker-build-push.yml
     with:
-      image_name: my-app   # change this to your repo/image name
+      image_name: my-app
+      tag: latest #change this to your repo/image name
     secrets: inherit
     

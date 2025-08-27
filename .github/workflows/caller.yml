@@ -2,9 +2,9 @@ name: Call Reusable Workflow
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "main" ]   # Trigger on push to main
 
 jobs:
-  use-build:
-    uses: gowthamkamparaju/<ci-common-workflows>/.github/workflows/resuable.yml@main
+  use-reusable:
+    uses: gowthamkamparaju/test/.github/workflows/resuable.yml@main
     

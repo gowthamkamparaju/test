@@ -1,18 +1,10 @@
-name: Caller - Docker Build & Push
+name: Call Reusable Workflow
 
 on:
   push:
-    branches:
-      - main
-      - feature/*
+    branches: [ "main" ]
 
 jobs:
-  call-docker-build:
-    uses: ./.github/workflows/docker-build-push.yml
-    with:
-      image_name: gowthamkamparaju/myapp   # Replace with your Docker Hub repo name
-      tag: latest
-    secrets:
-      DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
-      DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
-      
+  use-build:
+    uses: gowthamkamparaju/<ci-common-workflows>/.github/workflows/resuable.yml@main
+    
